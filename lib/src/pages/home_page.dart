@@ -101,7 +101,8 @@ class _My_HomePageState extends State<My_HomePage> {
                               width: 2,
                             ),
                             image: const DecorationImage(
-                              image: AssetImage('assets/images/profile.jpg'),
+                              image:
+                                  AssetImage('assets/images/futsaluser.jpeg'),
                               fit: BoxFit.cover,
                             ),
                           ),
