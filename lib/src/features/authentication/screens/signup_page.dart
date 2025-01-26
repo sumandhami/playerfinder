@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
-import 'start_page.dart';
+import 'login/login_page.dart';
+import '../../../pages/start_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -17,6 +17,9 @@ class _SignUpPageState extends State<SignUpPage> {
   final _phoneController = TextEditingController();
   final _locationController = TextEditingController();
 
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,13 +31,15 @@ class _SignUpPageState extends State<SignUpPage> {
               width: double.infinity,
               height: double.infinity,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
+                gradient: RadialGradient(
+                  center: Alignment.center,
+                  radius: 0.9,
                   colors: [
-                    Colors.green.shade700.withOpacity(0.6),
-                    Colors.white.withOpacity(0.4),
+                    Color(0xFF2A3D4E),
+                    Color(0xFF3B535F),
+                    Color(0xFF4C6D7A),
                   ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  stops: [0.3, 0.7, 1.0],
                 ),
               ),
             ),
@@ -84,43 +89,43 @@ class _SignUpPageState extends State<SignUpPage> {
                         fontFamily: 'Kanit',
                         fontSize: 18,
                         fontStyle: FontStyle.italic,
-                        color: Colors.teal.shade900,
+                        color: Colors.white,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 50),
                     // Name Input
                     _buildTextField(_nameController, 'Name'),
-                    SizedBox(height: 5),
+                    SizedBox(height: 15),
                     // Email Input
                     _buildTextField(_emailController, 'Email'),
-                    SizedBox(height: 5),
+                    SizedBox(height: 15),
                     // Phone Number Input
                     _buildTextField(_phoneController, 'Phone Number'),
-                    SizedBox(height: 5),
+                    SizedBox(height: 15),
                     // Location Input
                     _buildTextField(_locationController, 'Location'),
-                    SizedBox(height: 5),
+                    SizedBox(height: 15),
                     // Password Input
-                    _buildTextField(_passwordController, 'Password',
-                        obscureText: true),
-                    SizedBox(height: 5),
+                    _buildPasswordField(_passwordController, 'Password'),
+                    SizedBox(height: 15),
                     // Confirm Password Input
-                    _buildTextField(
-                        _confirmPasswordController, 'Confirm Password',
-                        obscureText: true),
+                    _buildPasswordField(
+                        _confirmPasswordController, 'Confirm Password'),
                     SizedBox(height: 30),
                     // Sign Up Button
-                    OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.teal.shade600,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF65A3B8),
                         foregroundColor: Colors.white,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                         side: BorderSide(color: Colors.white, width: 2),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
+                        shadowColor: Colors.black,
+                        elevation: 10,
                       ),
                       onPressed: () {
                         // Add sign-up functionality here
@@ -152,7 +157,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Text(
                         "Already have an account? Login",
                         style: TextStyle(
-                          color: Colors.teal.shade600,
+                          color: Colors.white,
                           fontSize: 16,
                         ),
                       ),
@@ -167,29 +172,80 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  // Text field builder to keep the original design from LoginPage
-  Widget _buildTextField(TextEditingController controller, String labelText,
-      {bool obscureText = false}) {
+  // Text field builder for general fields
+  Widget _buildTextField(TextEditingController controller, String labelText) {
     return TextField(
       controller: controller,
-      obscureText: obscureText,
       style: TextStyle(
-          color: Colors.grey.shade700, fontFamily: 'Kanit', fontSize: 18),
+        color: Colors.grey.shade300,
+        fontFamily: 'Kanit',
+        fontSize: 18,
+      ),
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: TextStyle(
-          color: Colors.blueGrey.shade900,
+          color: Colors.white,
           fontWeight: FontWeight.bold,
           fontFamily: 'Kanit',
           fontSize: 22,
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.blueGrey.shade900),
+          borderSide: BorderSide(color: Colors.white),
         ),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.teal.shade900),
+          borderSide: BorderSide(color: Colors.white),
         ),
-        contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 14),
+        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      ),
+    );
+  }
+
+  // Password field builder with eye icon
+  Widget _buildPasswordField(
+      TextEditingController controller, String labelText) {
+    return TextField(
+      controller: controller,
+      obscureText:
+          labelText == 'Password' ? _obscurePassword : _obscureConfirmPassword,
+      style: TextStyle(
+        color: Colors.grey.shade300,
+        fontFamily: 'Kanit',
+        fontSize: 18,
+      ),
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Kanit',
+          fontSize: 22,
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        suffixIcon: IconButton(
+          icon: Icon(
+            labelText == 'Password'
+                ? (_obscurePassword ? Icons.visibility_off : Icons.visibility)
+                : (_obscureConfirmPassword
+                    ? Icons.visibility_off
+                    : Icons.visibility),
+            color: Colors.white,
+          ),
+          onPressed: () {
+            setState(() {
+              if (labelText == 'Password') {
+                _obscurePassword = !_obscurePassword;
+              } else {
+                _obscureConfirmPassword = !_obscureConfirmPassword;
+              }
+            });
+          },
+        ),
       ),
     );
   }

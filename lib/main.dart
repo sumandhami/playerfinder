@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:playerconnect/pages/start_page.dart';
+import 'package:playerconnect/src/pages/start_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,8 +11,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Kick Connect",
-        home: MaterialApp(
-          home: StartingPage(),
-        ));
+        home: StartingPage());
   }
 }
