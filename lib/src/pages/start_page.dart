@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import '../features/authentication/screens/login/login_page.dart';
 
 class StartingPage extends StatelessWidget {
   const StartingPage({super.key});
@@ -15,7 +15,7 @@ class StartingPage extends StatelessWidget {
             height: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("images/intro.jpeg"),
+                image: AssetImage("assets/images/intro.jpeg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -27,8 +27,8 @@ class StartingPage extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Colors.lightBlueAccent.withOpacity(0.6),
-                  Colors.white.withOpacity(0.4),
+                  Color(0xFF2A3D4E).withOpacity(0.6), // Dark green tone
+                  Color(0xFF4C6D7A).withOpacity(0.4), // Slightly lighter green
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -54,7 +54,7 @@ class StartingPage extends StatelessWidget {
                         foreground: Paint()
                           ..style = PaintingStyle.stroke
                           ..strokeWidth = 4
-                          ..color = Colors.black, // Border color
+                          ..color = Color(0xFF4C6D7A), // Greenish border
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -80,13 +80,21 @@ class StartingPage extends StatelessWidget {
                     fontSize: 16,
                     fontStyle: FontStyle.italic,
                     color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(1.5, 1.5),
+                        blurRadius: 4,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ],
                   ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 50),
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.teal.shade600,
+                    backgroundColor:
+                        Color(0xFF65A3B8), // Green-blue variant for button
                     foregroundColor: Colors.white,
                     padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                     side: BorderSide(color: Colors.white, width: 2),

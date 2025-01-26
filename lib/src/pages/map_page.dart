@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
 
@@ -9,8 +8,6 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
