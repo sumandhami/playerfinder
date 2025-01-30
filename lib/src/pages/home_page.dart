@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:playerconnect/src/features/authentication/screens/create_request/create_request.dart';
+import 'package:playerconnect/src/features/authentication/screens/join_request/join_request.dart';
 import 'package:playerconnect/src/pages/map_page.dart';
 
 class My_HomePage extends StatefulWidget {
@@ -34,7 +36,8 @@ class _My_HomePageState extends State<My_HomePage> {
           ),
         ],
         backgroundColor:
-            Color(0xFF2A3D4E), // Dark greenish background for app bar
+            Color(0xFF1B2A41), // Dark greenish background for app bar
+        foregroundColor: Colors.grey.shade300,
       ),
       body: SafeArea(
         child: Stack(
@@ -48,9 +51,9 @@ class _My_HomePageState extends State<My_HomePage> {
                   center: Alignment.center,
                   radius: 0.9,
                   colors: [
-                    Color(0xFF2A3D4E), // Dark green center
-                    Color(0xFF3B535F), // Slightly lighter green for edges
-                    Color(0xFF4C6D7A), // Light greenish tone for outer edges
+                    Color(0xFF1B2A41),
+                    Color(0xFF23395B),
+                    Color(0xFF2D4A69),
                   ],
                   stops: [0.3, 0.7, 1.0],
                 ),
@@ -72,8 +75,8 @@ class _My_HomePageState extends State<My_HomePage> {
                         center: Alignment.center,
                         radius: 0.8,
                         colors: [
-                          Color(0xFF2A3D4E), // Dark green center
-                          Color(0xFF3B535F), // Light green around the edges
+                          Color(0xFF23395B),
+                          Color(0xFF2D4A69),
                         ],
                         stops: [0.3, 1.0],
                       ),
@@ -108,6 +111,7 @@ class _My_HomePageState extends State<My_HomePage> {
                           ),
                         ),
                         const SizedBox(width: 16),
+
                         // User Details
                         Expanded(
                           child: Column(
@@ -183,6 +187,7 @@ class _My_HomePageState extends State<My_HomePage> {
                     ),
                   ),
                   const SizedBox(height: 20),
+
                   // Buttons Section
                   Column(
                     children: [
@@ -190,12 +195,28 @@ class _My_HomePageState extends State<My_HomePage> {
                         context,
                         "Create Request",
                         Icons.add_circle_outline,
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CreateRequest(),
+                            ),
+                          );
+                        },
                       ),
                       const SizedBox(height: 12),
                       _buildSteamStyledButton(
                         context,
                         "Join Request",
                         Icons.group,
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => JoinRequest(),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -208,8 +229,8 @@ class _My_HomePageState extends State<My_HomePage> {
     );
   }
 
-  Widget _buildSteamStyledButton(
-      BuildContext context, String title, IconData icon) {
+  Widget _buildSteamStyledButton(BuildContext context, String title,
+      IconData icon, VoidCallback onPressed) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: Color(0xFF65A3B8),
@@ -223,9 +244,7 @@ class _My_HomePageState extends State<My_HomePage> {
         elevation: 10,
         minimumSize: const Size(double.infinity, 60),
       ),
-      onPressed: () {
-        // Handle functionality
-      },
+      onPressed: onPressed,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
