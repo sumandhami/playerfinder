@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Showing nearby futsal venues</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Showing nearby futsal venues</string>
+	<key>GMSAPIKey</key>
+	<string>AIzaSyAndA_kRGODfFEMs3HEVGJuT16QD6SXE9I</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
