@@ -27,8 +27,8 @@ class StartingPage extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFF2A3D4E).withOpacity(0.6), // Dark green tone
-                  Color(0xFF4C6D7A).withOpacity(0.4), // Slightly lighter green
+                  Color(0xFF1B2A41).withOpacity(0.6), // Dark green tone
+                  Color(0xFF23395B).withOpacity(0.4), // Slightly lighter green
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,

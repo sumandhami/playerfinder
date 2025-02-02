@@ -3,8 +3,8 @@ import 'package:playerconnect/src/common_widgets/Validations/emailvalidation.dar
 import 'package:playerconnect/src/common_widgets/Validations/inputvalidation.dart';
 import 'package:playerconnect/src/common_widgets/Validations/passwordvalidation.dart';
 import 'package:playerconnect/src/common_widgets/Validations/phonenovalidation.dart';
-import 'login/login_page.dart';
-import '../../../pages/start_page.dart';
+import '../login/login_page.dart';
+import '../../../shared_preferences/shared_prefs.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({super.key});
@@ -23,6 +23,18 @@ class _SignUpPageState extends State<SignUpPage> {
   final _phoneController = TextEditingController();
   final _locationController = TextEditingController();
 
+  void handleSignup() async {
+    await SharedPrefs.saveUserData(
+      _nameController.text,
+      _emailController.text,
+      _phoneController.text,
+      _locationController.text,
+      _passwordController.text,
+    );
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Loginpage()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +50,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   center: Alignment.center,
                   radius: 0.9,
                   colors: [
-                    Color(0xFF2A3D4E),
-                    Color(0xFF3B535F),
-                    Color(0xFF4C6D7A),
+                    Color(0xFF1B2A41),
+                    Color(0xFF23395B),
+                    Color(0xFF2D4A69),
                   ],
                   stops: [0.3, 0.7, 1.0],
                 ),
@@ -149,11 +161,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           // Add sign-up functionality here
                           if (_formkey.currentState!.validate()) {
                             // Form is valid, proceed to the next page
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => StartingPage()),
-                            );
+                            handleSignup();
                           }
                         },
                         child: Text(

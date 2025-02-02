@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:playerconnect/src/common_widgets/Validations/emailvalidation.dart';
 import 'package:playerconnect/src/common_widgets/Validations/passwordvalidation.dart';
 import 'package:playerconnect/src/features/authentication/screens/forgotpass/forgotpass.dart';
-import 'package:playerconnect/src/features/authentication/screens/signup_page.dart';
+import 'package:playerconnect/src/features/authentication/screens/singup/signup_page.dart';
 import 'package:playerconnect/src/pages/home_page.dart';
-import 'package:playerconnect/src/pages/start_page.dart';
+import '../../../shared_preferences/shared_prefs.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({super.key});
@@ -17,6 +17,22 @@ class _LoginpageState extends State<Loginpage> {
   final _formkey = GlobalKey<FormState>(); // Assign this to Form widget
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  Future<void> checkLogin() async {
+    Map<String, String?> userData = await SharedPrefs.getUserData();
+
+    if (_emailController.text == userData["email"] &&
+        _passwordController.text == userData["password"]) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => My_HomePage()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Invalid Email or Password")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +49,9 @@ class _LoginpageState extends State<Loginpage> {
                   center: Alignment.center,
                   radius: 0.9,
                   colors: [
-                    Color(0xFF2A3D4E),
-                    Color(0xFF3B535F),
-                    Color(0xFF4C6D7A),
+                    Color(0xFF1B2A41),
+                    Color(0xFF23395B),
+                    Color(0xFF2D4A69),
                   ],
                   stops: [0.3, 0.7, 1.0],
                 ),
@@ -132,11 +148,7 @@ class _LoginpageState extends State<Loginpage> {
                         onPressed: () {
                           if (_formkey.currentState!.validate()) {
                             // Navigate only if the form is valid
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => My_HomePage()),
-                            );
+                            checkLogin();
                           }
                         },
                         child: const Text(

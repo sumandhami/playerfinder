@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playerconnect/src/features/authentication/screens/create_request/timeslot/timeslot_page.dart';
 
 class CreateRequest extends StatelessWidget {
   CreateRequest({super.key});
@@ -16,6 +17,10 @@ class CreateRequest extends StatelessWidget {
     {
       "name": "Kick Off Futsal",
       "location": "Bhaktapur",
+    },
+    {
+      "name": "Hello futsal",
+      "location": "Lalitpur",
     },
   ];
 
@@ -59,8 +64,20 @@ class CreateRequest extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            TimeSlotPage(venue: venue["name"]!)),
+                      builder: (context) {
+                        // Check if the venue's name is null or empty before passing it
+                        if (venue["name"] != null &&
+                            venue["name"]!.isNotEmpty) {
+                          return TimeSlotPage(venue: venue["name"]!);
+                        } else {
+                          // Handle the error (you can return a fallback widget or show a message)
+                          return Scaffold(
+                            body: Center(
+                                child: Text('Error: Venue name is missing')),
+                          );
+                        }
+                      },
+                    ),
                   );
                 },
                 child: Container(
@@ -106,24 +123,6 @@ class CreateRequest extends StatelessWidget {
             },
           ),
         ),
-      ),
-    );
-  }
-}
-
-class TimeSlotPage extends StatelessWidget {
-  final String venue;
-  const TimeSlotPage({required this.venue});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Available Time Slots - $venue"),
-        backgroundColor: Color(0xFF1B2A41),
-      ),
-      body: Center(
-        child: Text("Time slot selection will be implemented here"),
       ),
     );
   }
